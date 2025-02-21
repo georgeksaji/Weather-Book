@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HelloController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,13 +14,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/index', function () {
+    return view('index');
+});
 Route::get('/', function () {
-    return view('login');
+    return view('index');
 });
 Route::get('/register', function () {
     return view('register');
-});Route::get('/home', function () {
-    return view('home');
-});Route::get('/feedback', function () {
+});
+Route::get('/feedback', function () {
     return view('feedback');
+});
+Route::get('/remove', function () {
+    return view('remove');
+});
+Route::get('/home', function () {
+    $location = app(HelloController::class)->getLocation();
+    return view('home', ['city'=>$location[0], 'region'=>$location[1], 'country'=>$location[2]]);
+});
+Route::get('/add', function () {
+    $location = app(HelloController::class)->getLocation();
+    return view('add', ['city'=>$location[0], 'region'=>$location[1], 'country'=>$location[2]]);
 });

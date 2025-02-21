@@ -38,7 +38,7 @@
             background-color: #1e1e1e;
             width: 100%;
             font-family: Arial, sans-serif;
-            font-size: 10px;
+            font-size: 13px;
             padding-inline:10px;
             color: white;
         }
@@ -51,7 +51,7 @@
             text-decoration: none;
         }
         .sidebar {
-            width: 70%;
+            width: 55%;
             background-color: #1e1e1e;
             padding: 20px;
             border-radius: 10px;
@@ -63,10 +63,12 @@
         }
 
         .login{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 50%;
+            display: flex
+;
+    justify-content: center;
+    align-items: center;
+    height: 26%;
+    padding-block: 1%;
         }
 
         .ad-btn {
@@ -125,16 +127,12 @@
             display: block;
             margin-top: 5px;
         }
-        textarea
+        input
         {
-            /* width: 100%;
-            height: 20%; */
-            padding: 10px;
-            border-radius:10px;
+
             border: none;
             outline: none;
             font-family: Arial, sans-serif;
-            /* font-weight:; */
             font-size: 14px;
             color: white;
             background-color: #94959538;
@@ -145,18 +143,17 @@
 <body>
         
         <div class="sidebar">
-        <div class="topbar"><a href="/home">Home->Feedback</a></div>
+        <div class="topbar"><a href="/home">Home->Remove Cities</a></div>
             <div class="logo">
                 <img src="logo.png" alt="logo" height="100px" />
             </div>
-            <div class="title atkinson-hyperlegible-next-text-font">Feedback
-            <a class="linkstyle" href="register.html" class="">Kindly let us know what you think about Weather Book!</a>
-        </div>
+            <div class="title atkinson-hyperlegible-next-text-font">Remove Cities
+             </div>
             <div class="login">
                 <form action="" method="post">
-                    <!-- //Feedback -->
-                    <textarea name="feedback" id="feedback" cols="50" rows="10" placeholder="Enter your feedback here..."></textarea>
-                </form>
+
+        
+            </form>
             </div>
             <div class="buttons">
                 <button class="ad-btn logout"><img src="send.png" height="15px" alt="Fav" />&nbspSend</button>

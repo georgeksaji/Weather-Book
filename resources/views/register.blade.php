@@ -175,7 +175,7 @@
             <div class="buttons">
                 <button class="ad-btn logout">Register</button>
             </div>
-                <a href="/" class="">Already using Weather Book? Login</a>
+                <a href="/index" class="">Already using Weather Book? Login</a>
 
         </div>
   
