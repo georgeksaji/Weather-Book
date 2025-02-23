@@ -57,13 +57,14 @@
         }
 
         .sidebar {
-            width: 55%;
+            display: flow;
+            width: 70%;
             background-color: #1e1e1e;
             padding: 20px;
             border-radius: 10px;
-            height: 60%;
-            min-height: inherit;
-            transition: all 0.3sease;
+            height: 64%;
+            flex-wrap: wrap;
+            transition: all 0.3s ease;
 
         }
 
@@ -104,6 +105,7 @@
             justify-content: center;
             align-items: center;
             width: 38vh;
+            margin-block: 0.5%;
         }
 
         .buttons-inner {
@@ -114,7 +116,6 @@
 
         input[type="text"],
         input[type="password"] {
-            width: 100%;
             padding: 10px;
             border-radius: 10px;
             border: none;

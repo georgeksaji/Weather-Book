@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
 
 class HelloController extends Controller
 {
@@ -46,9 +47,15 @@ class HelloController extends Controller
         return [$city, $region, $country];
     }
 
-
-
-
-
-
+    // /sendfeedbackmail
+    public function sendfeedbackmail(Request $request)
+    {
+        $email = $request->feedback;
+        Mail::raw($email, function ($message) {
+            $message->to('mca2426@rajagiri.edu')
+                    ->from('georgeksaji14@gmail.com', 'Weather Book') // Add sender details
+                    ->subject('Weather Book Feedback');
+        });
+        return view('feedback');
+    }
 }

@@ -51,11 +51,11 @@
             text-decoration: none;
         }
         .sidebar {
-            width: 70%;
+            width: 50%;
             background-color: #1e1e1e;
             padding: 20px;
             border-radius: 10px;
-            height: 60%;
+            display: inline-grid;
             transition: all 0.3s ease;
         }
         .sidebar:hover {
@@ -66,7 +66,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 50%;
         }
 
         .ad-btn {
@@ -88,6 +87,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            margin-block: 1%;
         }
         input[type="text"],input[type="password"] {
             width: 280px;
@@ -100,7 +100,7 @@
         }
         .title {
             color: #ffffff;
-            font-size: 30px;
+            margin-block: 1.8%;
             font-weight: bold;
             text-align: center;
         }
@@ -127,14 +127,11 @@
         }
         textarea
         {
-            /* width: 100%;
-            height: 20%; */
             padding: 10px;
             border-radius:10px;
             border: none;
             outline: none;
             font-family: Arial, sans-serif;
-            /* font-weight:; */
             font-size: 14px;
             color: white;
             background-color: #94959538;
@@ -153,14 +150,15 @@
             <a class="linkstyle" href="register.html" class="">Kindly let us know what you think about Weather Book!</a>
         </div>
             <div class="login">
-                <form action="" method="post">
+                <form action="/sendfeedbackmail" method="post">
                     <!-- //Feedback -->
-                    <textarea name="feedback" id="feedback" cols="50" rows="10" placeholder="Enter your feedback here..."></textarea>
-                </form>
+                     @csrf
+                    <textarea name="feedback" name="feedback" id="feedback" cols="50" rows="10" placeholder="Enter your feedback here..."></textarea>
             </div>
             <div class="buttons">
                 <button class="ad-btn logout"><img src="send.png" height="15px" alt="Fav" />&nbspSend</button>
             </div>
+            </form>
         </div>
   
 </body>

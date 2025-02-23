@@ -39,3 +39,6 @@ Route::get('/add', function () {
 });
 
 Route::post('/register_user', [HelloController::class, 'register_user']);
+
+// /sendfeedbackmail
+Route::post('/sendfeedbackmail', [HelloController::class, 'sendfeedbackmail']);
