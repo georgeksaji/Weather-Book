@@ -37,3 +37,5 @@ Route::get('/add', function () {
     $location = app(HelloController::class)->getLocation();
     return view('add', ['city'=>$location[0], 'region'=>$location[1], 'country'=>$location[2]]);
 });
+
+Route::post('/register_user', [HelloController::class, 'register_user']);

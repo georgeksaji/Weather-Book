@@ -31,6 +31,7 @@
             align-items: center;
             cursor: pointer;
             overflow: hidden;
+            flex-wrap: wrap;
             font-family: Arial, Helvetica, sans-serif;
             height: 100vh;
             width: 100vw;

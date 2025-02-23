@@ -30,7 +30,7 @@
       justify-content: center;
       align-items: center;
       cursor: pointer;
-      overflow: hidden;
+      scrollbar-width: none;
       font-family: Arial, Helvetica, sans-serif;
     }
 
@@ -66,23 +66,27 @@
     }
 
     .weather-icon img {
-      width: 100px;
+      width: 100%;
+      height: auto;
     }
 
-    .hourly-forecast,
     .weekly-forecast {
-      display: flex;
-      justify-content: space-between;
+      justify-content: flex-start;
       padding: 10px 0;
+      gap: 5px;
       overflow-x: auto;
+      display: flex;
+      flex-wrap: wrap;
     }
-
-    .hour,
+    
     .day {
       background: #333;
-      padding: 10px;
-      border-radius: 5px;
-      margin: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px;
+    max-width: 16.5%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
     }
 
     .ad-btn {
@@ -95,7 +99,7 @@
       cursor: pointer;
       margin-top: 20px;
       font-weight: bold;
-      min-width: 125px;
+      min-width: 50%;
       transition: all 0.3s ease;
     }
 
@@ -121,21 +125,20 @@
     }
 
     input[type="text"] {
-      width: 60%;
-      padding: 10px;
+      width: 58%;
+      padding-block: 0px;
+      padding-inline: 10px;
       border-radius: 5px 0px 0px 5px;
       border: none;
       outline: none;
       font-family: Arial, sans-serif;
+      height: 45%;
     }
 
-    /* .current-weather,.weekly-forecast{
 
-
-      } */
     .citybutton {
       width: 30%;
-      padding-block: 2.59%;
+      height: 45%;
       border-radius: 0px 5px 5px 0px;
       border: 1px solid #bfbfbf;
       background-color: #1c9fe3;
@@ -152,6 +155,14 @@
       font-family: Arial, Helvetica, sans-serif;
       font-size: 15px;
       color: #ffffff;
+    }
+
+    .fav {
+      max-height: 18vh;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      padding: 2%;
+      scrollbar-width: none;
     }
 
     .title {
@@ -174,7 +185,8 @@
       border: none;
       padding: 6px;
       margin: 3px;
-      width: 100%;
+      width: 95%;
+      text-align: center;
       font-weight: bold;
       text-align: left;
       border-radius: 5px;
@@ -199,25 +211,16 @@
       display: inline-grid;
       justify-content: center;
       align-items: center;
-      height: 19vh;
       width: 100%;
 
     }
 
-    ul {
-      max-height: 18vh;
-      overflow-y: scroll;
-      overflow-x: hidden;
-      padding: 2%;
-      scrollbar-color: black;
-      scrollbar-width: thin;
-    }
+
 
     .br1 {
       display: flex;
-      justify-content: center;
+      justify-content: space-evenly;
       align-items: center;
-      height: 50%;
       width: 100%;
     }
 
@@ -265,35 +268,39 @@
       <div class="location">
         <form action="" method="post">
           <input type="text" id="city" value="{{ $city }}" placeholder="Enter city name">
-          <button type="button" class="citybutton" onclick="getWeather(document.getElementById('city').value)">
-            <!-- <img src="search.png" height="29px" alt="" /> -->Search
-          </button>
+          <button type="button" class="citybutton"
+            onclick="getWeather(document.getElementById('city').value)">Search</button>
         </form>
       </div>
       <h3><img src="fav.png" height="20px" alt="Fav" />&nbspMy Favorites</h3>
       <div class="fav">
-        <ul type="none">
-          <li><button class="favcity" value="London" onclick="getWeather(this.value)">London</button></li>
-          <li><button class="favcity" value="Tokyo" onclick="getWeather(this.value)">Tokyo</button></li>
-          <li><button class="favcity" value="New York" onclick="getWeather(this.value)">New York</button></li>
-          <li><button class="favcity" value="Delhi" onclick="getWeather(this.value)">Delhi</button></li>
-          <li><button class="favcity" value="Paris" onclick="getWeather(this.value)">Paris</button></li>
 
-        </ul>
+        <button class="favcity" value="London" onclick="getWeather(this.value)">London</button>
+        <button class="favcity" value="Tokyo" onclick="getWeather(this.value)">Tokyo</button>
+        <button class="favcity" value="New York" onclick="getWeather(this.value)">New York</button>
+        <button class="favcity" value="Delhi" onclick="getWeather(this.value)">Delhi</button>
+        <button class="favcity" value="Paris" onclick="getWeather(this.value)">Paris</button>
+        <button class="favcity" value="London" onclick="getWeather(this.value)">London</button>
+        <button class="favcity" value="Tokyo" onclick="getWeather(this.value)">Tokyo</button>
+
       </div>
       <div class="buttonouter">
         <div class="br1">
-        <a href="/add"><button class="ad-btn" style="background-color: #ffffff;color:black"><img src="add.png" height="17px"
-              alt="Fav" />&nbspAdd</button></a>
-        <a href="/remove"><button class="ad-btn rm-btn" style="background-color: #ffffff;color:black"><img src="remove.png"
-              height="17px" alt="Fav" />&nbspRemove</button></a>
+          <a href="/add"><button class="ad-btn rm-btn" style="background-color: #ffffff;color:black">&nbsp&nbsp<img src="add.png"
+                height="17px" alt="Fav" />&nbspAdd&nbsp&nbsp</button></a>
+          <a href="/remove"><button class="ad-btn rm-btn" style="background-color: #ffffff;color:black"><img
+                src="remove.png" height="17px" alt="Fav" />&nbspRemove</button></a>
         </div>
         <div class="br1">
           <a href="/feedback"><button class="ad-btn"><img src="send.png" height="15px"
                 alt="Fav" />&nbspFeedback</button></a>
-          <button class="ad-btn logout"><img src="logout.png" height="15px" alt="Fav" />&nbspLog Out</button>
+          <a href="/feedback"><button class="ad-btn logout"><img src="logout.png" height="15px" alt="Fav" />&nbspLog
+              Out</button></a>
         </div>
-        <div class="topbar" style="text-align:center"><p><img src="current-location.png" height="15px" alt="">&nbsp{{ $city}},&nbsp{{ $region }},&nbsp{{ $country }}</p></div>
+        <div class="topbar" style="text-align:center">
+          <p><img src="current-location.png" height="15px" alt="">&nbsp{{ $city}},&nbsp{{ $region }},&nbsp{{ $country }}
+          </p>
+        </div>
       </div>
     </div>
     <main class="weather-content">
@@ -303,9 +310,34 @@
           <p>&nbspSearch a city to get the weather details.</p>
         </div>
       </div>
-      <div id="forecast" class="weekly-forecast"></div>
+      <div id="forecast" class="weekly-forecast">
+
+      </div>
 
       <script>
+
+const customIcons = {
+  "01d": "https://cdn-icons-png.flaticon.com/512/869/869869.png", // Clear day
+  "01n": "https://cdn-icons-png.flaticon.com/512/869/869869.png", // Clear night
+  "02d": "https://cdn-icons-png.flaticon.com/512/1163/1163657.png", // Few clouds day
+  "02n": "https://cdn-icons-png.flaticon.com/512/1163/1163657.png", // Few clouds night
+  "03d": "https://cdn-icons-png.flaticon.com/512/1163/1163624.png", // Scattered clouds
+  "03n": "https://cdn-icons-png.flaticon.com/512/1163/1163624.png", 
+  "04d": "https://cdn-icons-png.flaticon.com/512/1779/1779806.png", // Broken clouds
+  "04n": "https://cdn-icons-png.flaticon.com/512/1779/1779806.png", 
+  "09d": "https://cdn-icons-png.flaticon.com/512/2204/2204345.png", // Shower rain
+  "09n": "https://cdn-icons-png.flaticon.com/512/2204/2204345.png", 
+  "10d": "https://cdn-icons-png.flaticon.com/512/869/869869.png", // Rain day
+  "10n": "https://cdn-icons-png.flaticon.com/512/869/869869.png", 
+  "11d": "https://cdn-icons-png.flaticon.com/512/1779/1779867.png", // Thunderstorm
+  "11n": "https://cdn-icons-png.flaticon.com/512/1779/1779867.png", 
+  "13d": "https://cdn-icons-png.flaticon.com/512/1163/1163650.png", // Snow
+  "13n": "https://cdn-icons-png.flaticon.com/512/1163/1163650.png", 
+"50d": "https://cdn-icons-png.flaticon.com/512/2675/2675962.png",//Mist
+"50n": "https://cdn-icons-png.flaticon.com/512/2675/2675962.png",
+
+};
+
         onload = getWeather({{ $city }});
 
         function getWeather(cityName = null) {
@@ -327,11 +359,12 @@
             .then((data) => {
               const weatherDiv = document.getElementById("weather");
               if (data.cod === 200) {
-                const iconUrl = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+                const iconCode = data.weather[0].icon;
+                const iconUrl = customIcons[iconCode] || `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
                 const weatherDate = new Date(data.dt * 1000).toLocaleString();
                 weatherDiv.innerHTML = `
                 <h2>Current Weather in ${data.name}, ${data.sys.country}</h2>
-                <img src="${iconUrl}" alt="${data.weather[0].description}" class="weather-icon">
+                <img src="${iconUrl}" alt="${data.weather[0].description}" class="weather-icon" align="center" height="100vh">
                 <p><strong>Temperature:</strong> ${data.main.temp}°C</p>
                 <p><strong>Weather:</strong> ${data.weather[0].description}</p>
                 <p><strong>Humidity:</strong> ${data.main.humidity}%</p>
@@ -349,35 +382,42 @@
               ).innerHTML = `<p>Failed to fetch current weather data. Please try again.</p>`;
             });
 
-          fetch(forecastUrl)
-            .then((response) => response.json())
-            .then((data) => {
-              const forecastDiv = document.getElementById("forecast");
-              if (data.cod === "200") {
-                let forecastHtml = `<h2></h2>`;
-                const filteredData = data.list
-                  .filter((_, index) => index % 2 === 0)
-                  .slice(0, 5);
+            fetch(forecastUrl)
+  .then((response) => response.json())
+  .then((data) => {
+    const forecastDiv = document.getElementById("forecast");
+    if (data.cod === "200") {
+      let forecastHtml = `<h2></h2>`;
+      const filteredData = data.list
+        .filter((_, index) => index % 8 === 0) // Adjust the filtering if needed
+        .slice(0, 5);
 
-                filteredData.forEach((item) => {
-                  const iconUrl = `https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`;
-                  const dateTime = new Date(item.dt * 1000).toLocaleString();
+      filteredData.forEach((item) => {
+        const iconCode = item.weather[0].icon; // Extract the icon code properly
+        const iconUrl = customIcons[iconCode] || `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+        // const dateTime = new Date(item.dt * 1000).toLocaleString();
+        const date = new Date(item.dt * 1000).toLocaleDateString();
+        const Time = new Date(item.dt * 1000).toLocaleTimeString();
+        
 
-                  forecastHtml += `
-                <div class="day">
-                <p><strong>${dateTime}</strong></p>
-                <center><img src="${iconUrl}" alt="${item.weather[0].description}" class="weather-icon"></center>
-                <p><strong>Temperature:</strong> ${item.main.temp}°C</p>
-                <p><strong>Weather:</strong> ${item.weather[0].description}</p>
-                </div>
-                `;
-                });
+        forecastHtml += `
+          <div class="day">
+            <center>
+            <p><strong>${date}</strong></p>
+             <p>${Time}</p>
+            <img src="${iconUrl}" alt="${item.weather[0].description}" class="weather-icon" align="center" width="50%">            
+            <p><strong>${item.main.temp}°C</strong></p>
+            <p>${item.weather[0].description.charAt(0).toUpperCase() + item.weather[0].description.slice(1)}</p>
+            </center>
+          </div>
+        `;
+      });
 
-                forecastDiv.innerHTML = forecastHtml;
-              } else {
-                forecastDiv.innerHTML = `<p>Error: ${data.message}</p>`;
-              }
-            })
+      forecastDiv.innerHTML = forecastHtml;
+    } else {
+      forecastDiv.innerHTML = `<p>Error: ${data.message}</p>`;
+    }
+  })
             .catch((error) => {
               console.error("Error fetching forecast data:", error);
               document.getElementById(
@@ -387,7 +427,7 @@
         }
       </script>
     </main>
-    </div>
+  </div>
   </div>
 </body>
 
