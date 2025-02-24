@@ -94,8 +94,9 @@
             border: none;
             outline: none;
             font-family: Arial, sans-serif;
-            /* font-weight:; */
+            color:rgb(152, 152, 152);
             font-size: 14px;
+            background-color: #94959538;
         }
 
 
@@ -150,9 +151,10 @@
         <div class="buttons">
             <button class="ad-btn logout">Login</button>
         </div>
-        <a href="/register" class="">New to Weather Book? Register</a>
-
-    </div>
+        <div class="footer_outer">
+        <div class="footer"><a href="/register" class="">New to Weather Book? Register Now.</a></div>
+        <div class="footer"><a href="/confirmpass" class="">Forgot Password?</a></div>
+    </div></div>
 
 </body>
 

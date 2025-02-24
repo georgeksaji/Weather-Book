@@ -37,16 +37,14 @@
         }
 
         .sidebar {
-            min-width: 300px;
             width: 25%;
             background-color: #1e1e1e;
-            padding: 15px;
+            padding: 20px;
             border-radius: 10px;
-            height: 70%;
-            transition: all 0.3s ease;
+            flex-wrap: wrap;
             display: inline-table;
-
-
+            height: 60%;
+            transition: all 0.3s ease;
         }
 
         .sidebar:hover {
@@ -56,8 +54,9 @@
         .login {
             display: flex;
             justify-content: center;
-            height: 45%;
-            width: 100%;
+            align-items: center;
+            margin-bottom: 20px;
+            height: 35%;
         }
 
 
@@ -67,6 +66,7 @@
             color: #ffffff;
             border: none;
             padding: 10px 20px;
+            margin: 10px;
             border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
@@ -82,60 +82,19 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-block: 1vh;
-        }
-
-        input {
-            margin-block-start: 2vh;
+            height: 20%;
         }
 
         input[type="text"],
         input[type="password"] {
-            width: 83%;
             padding: 10px;
             border-radius: 10px;
             border: none;
+            outline: none;
+            font-family: Arial, sans-serif;
             color:rgb(152, 152, 152);
-            outline: none;
-            font-family: Arial, sans-serif;
             font-size: 14px;
             background-color: #94959538;
-        }
-
-        input[type="date"]::-webkit-datetime-edit {
-            color: rgb(119, 119, 122);
-        }
-
-        #dob {
-            width: 30%;
-            padding: 10px;
-            border-radius: 10px;
-            border: none;
-            outline: none;
-            font-family: Arial, sans-serif;
-            margin-inline-end: 5px;
-            font-size: 14px;
-            background-color: #94959538;
-        }
-
-        #ph {
-            width: 45%;
-            padding: 10px;
-            border-radius: 10px;
-            border: none;
-            outline: none;
-            font-family: Arial, sans-serif;
-            margin-inline-start: 5px;
-            font-size: 14px;
-            background-color: #94959538;
-        }
-
-        .section {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            flex-wrap: nowrap;
         }
 
 
@@ -143,21 +102,21 @@
             color: #ffffff;
             font-size: 30px;
             font-weight: bold;
+            margin-bottom: 20px;
             text-align: center;
-            width: 100%;
         }
 
         .logo {
             display: flex;
             justify-content: center;
             align-items: center;
+            margin-bottom: 20px;
         }
 
         form {
-            display: flow;
+            display: inline-grid;
             justify-content: center;
             align-items: center;
-            text-align: center;
             height: 100%;
             width: 100%;
         }
@@ -168,7 +127,7 @@
             text-align: center;
             text-decoration: none;
             display: block;
-            margin-top: 5px
+            margin-top: 5px;
         }
     </style>
 </head>
@@ -178,23 +137,21 @@
         <div class="logo">
             <img src="logo.png" alt="logo" height="150px" />
         </div>
-        <div class="title atkinson-hyperlegible-next-text-font">Register</div>
+        <div class="title atkinson-hyperlegible-next-text-font">Forgot Password</div>
         <div class="login">
             <form action="" method="post">
-                <input type="text" name="username" placeholder="Username" required />
-                <div class="section">
-                    <input id="dob" type="date" name="dob" placeholder="Date of Birth" required />
-                    <input id="ph" type="number" name="phone" placeholder="Phone" required />
+                <!-- username and password -->
+                <div class="buttons">
+                    <input type="text" name="username" placeholder="Username" required />
+                    <button class="ad-btn logout">&nbspOTP&nbsp</button>
                 </div>
-                <input type="text" name="location" placeholder="Location" required />
-                <input type="password" name="password" placeholder="Password" required />
+                <div class="buttons">
+                    <input type="password" name="password" placeholder="Password" required />
+                    <button class="ad-btn logout">Reset</button>
+                </div>
             </form>
         </div>
-        <div class="buttons">
-            <button class="ad-btn logout">Register</button>
-        </div>
-        <a href="/index" class="">Already using Weather Book? Login</a>
-
+        <div class="footer"><a href="/index" class=""><-&nbspBack to Login</a></div>
     </div>
 
 </body>

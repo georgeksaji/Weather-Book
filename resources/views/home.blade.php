@@ -78,15 +78,15 @@
       display: flex;
       flex-wrap: wrap;
     }
-    
+
     .day {
       background: #333;
-    padding: 10px;
-    border-radius: 5px;
-    margin: 5px;
-    max-width: 16.5%;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
+      padding: 10px;
+      border-radius: 5px;
+      margin: 5px;
+      max-width: 16.5%;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
     }
 
     .ad-btn {
@@ -130,6 +130,9 @@
       padding-inline: 10px;
       border-radius: 5px 0px 0px 5px;
       border: none;
+      font-weight: 700;
+      color: rgb(150, 150, 150);
+      background-color: #94959538;
       outline: none;
       font-family: Arial, sans-serif;
       height: 45%;
@@ -141,7 +144,7 @@
       height: 45%;
       border-radius: 0px 5px 5px 0px;
       border: 1px solid #bfbfbf;
-      background-color: #1c9fe3;
+      background-color: #595959;
       font-size: 14px;
       color: rgb(255, 255, 255);
       border: none;
@@ -215,7 +218,9 @@
 
     }
 
-
+    h3 {
+      margin-block: 2px;
+    }
 
     .br1 {
       display: flex;
@@ -228,7 +233,7 @@
       .container {
         flex-direction: column;
       }
-
+    
       .sidebar {
         width: 100%;
         margin-bottom: 20px;
@@ -243,6 +248,11 @@
 
       }
 
+    }
+    .linkstyle,.linkstyle:visited,.linkstyle:hover,.linkstyle:active {
+        color: #ffffff;
+        text-decoration: none;
+      }
       .topbar {
         background-color: #1e1e1e;
         width: 100%;
@@ -252,7 +262,7 @@
         padding-inline: 10px;
         color: white;
       }
-    }
+    
   </style>
 </head>
 
@@ -286,8 +296,8 @@
       </div>
       <div class="buttonouter">
         <div class="br1">
-          <a href="/add"><button class="ad-btn rm-btn" style="background-color: #ffffff;color:black">&nbsp&nbsp<img src="add.png"
-                height="17px" alt="Fav" />&nbspAdd&nbsp&nbsp</button></a>
+          <a href="/add"><button class="ad-btn rm-btn" style="background-color: #ffffff;color:black">&nbsp&nbsp<img
+                src="add.png" height="17px" alt="Fav" />&nbspAdd&nbsp&nbsp</button></a>
           <a href="/remove"><button class="ad-btn rm-btn" style="background-color: #ffffff;color:black"><img
                 src="remove.png" height="17px" alt="Fav" />&nbspRemove</button></a>
         </div>
@@ -302,6 +312,10 @@
           </p>
         </div>
       </div>
+      <div class="footer" style="width: 100%;height: 2%;display: flex;justify-content: space-evenly;font-size: 12px;">
+        <a href="/about" class="linkstyle">About</a>
+        <a href="/contact" class="linkstyle">Contact</a>
+      </div>
     </div>
     <main class="weather-content">
       <div id="weather" class="current-weather">
@@ -311,9 +325,7 @@
         </div>
       </div>
       <div id="forecast" class="weekly-forecast">
-
       </div>
-
     </main>
   </div>
   </div>
@@ -322,53 +334,53 @@
 
 <script>
 
-const customIcons = {
-  "01d": "https://cdn-icons-png.flaticon.com/512/869/869869.png", // Clear day
-  "01n": "https://cdn-icons-png.flaticon.com/512/869/869869.png", // Clear night
-  "02d": "https://cdn-icons-png.flaticon.com/512/1163/1163657.png", // Few clouds day
-  "02n": "https://cdn-icons-png.flaticon.com/512/1163/1163657.png", // Few clouds night
-  "03d": "https://cdn-icons-png.flaticon.com/512/1163/1163624.png", // Scattered clouds
-  "03n": "https://cdn-icons-png.flaticon.com/512/1163/1163624.png", 
-  "04d": "https://cdn-icons-png.flaticon.com/512/1779/1779806.png", // Broken clouds
-  "04n": "https://cdn-icons-png.flaticon.com/512/1779/1779806.png", 
-  "09d": "https://cdn-icons-png.flaticon.com/512/2204/2204345.png", // Shower rain
-  "09n": "https://cdn-icons-png.flaticon.com/512/2204/2204345.png", 
-  "10d": "https://cdn-icons-png.flaticon.com/512/869/869869.png", // Rain day
-  "10n": "https://cdn-icons-png.flaticon.com/512/869/869869.png", 
-  "11d": "https://cdn-icons-png.flaticon.com/512/1779/1779867.png", // Thunderstorm
-  "11n": "https://cdn-icons-png.flaticon.com/512/1779/1779867.png", 
-  "13d": "https://cdn-icons-png.flaticon.com/512/1163/1163650.png", // Snow
-  "13n": "https://cdn-icons-png.flaticon.com/512/1163/1163650.png", 
-"50d": "https://cdn-icons-png.flaticon.com/512/2675/2675962.png",//Mist
-"50n": "https://cdn-icons-png.flaticon.com/512/2675/2675962.png",
+  const customIcons = {
+    "01d": "https://cdn-icons-png.flaticon.com/512/869/869869.png", // Clear day
+    "01n": "https://cdn-icons-png.flaticon.com/512/869/869869.png", // Clear night
+    "02d": "https://cdn-icons-png.flaticon.com/512/1163/1163657.png", // Few clouds day
+    "02n": "https://cdn-icons-png.flaticon.com/512/1163/1163657.png", // Few clouds night
+    "03d": "https://cdn-icons-png.flaticon.com/512/1163/1163624.png", // Scattered clouds
+    "03n": "https://cdn-icons-png.flaticon.com/512/1163/1163624.png",
+    "04d": "https://cdn-icons-png.flaticon.com/512/1779/1779806.png", // Broken clouds
+    "04n": "https://cdn-icons-png.flaticon.com/512/1779/1779806.png",
+    "09d": "https://cdn-icons-png.flaticon.com/512/2204/2204345.png", // Shower rain
+    "09n": "https://cdn-icons-png.flaticon.com/512/2204/2204345.png",
+    "10d": "https://cdn-icons-png.flaticon.com/512/869/869869.png", // Rain day
+    "10n": "https://cdn-icons-png.flaticon.com/512/869/869869.png",
+    "11d": "https://cdn-icons-png.flaticon.com/512/1779/1779867.png", // Thunderstorm
+    "11n": "https://cdn-icons-png.flaticon.com/512/1779/1779867.png",
+    "13d": "https://cdn-icons-png.flaticon.com/512/1163/1163650.png", // Snow
+    "13n": "https://cdn-icons-png.flaticon.com/512/1163/1163650.png",
+    "50d": "https://cdn-icons-png.flaticon.com/512/2675/2675962.png",//Mist
+    "50n": "https://cdn-icons-png.flaticon.com/512/2675/2675962.png",
 
-};
+  };
 
-        onload = getWeather({{ $city }});
+  onload = getWeather({{ $city }});
 
-        function getWeather(cityName = null) {
-          const city = cityName || document.getElementById("city").value;
-          if (!city) {
-            alert("Please enter a city name.");
-            return;
-          }
+  function getWeather(cityName = null) {
+    const city = cityName || document.getElementById("city").value;
+    if (!city) {
+      alert("Please enter a city name.");
+      return;
+    }
 
-          const apiKey = "88efc61cf31ab2cf85baddc82176c37d";
-          const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    const apiKey = "88efc61cf31ab2cf85baddc82176c37d";
+    const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
-          // http://api.openweathermap.org/geo/1.0/reverse?lat={lat}&lon={lon}&limit={limit}&appid={API key}
+    // http://api.openweathermap.org/geo/1.0/reverse?lat={lat}&lon={lon}&limit={limit}&appid={API key}
 
-          const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+    const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
 
-          fetch(currentWeatherUrl)
-            .then((response) => response.json())
-            .then((data) => {
-              const weatherDiv = document.getElementById("weather");
-              if (data.cod === 200) {
-                const iconCode = data.weather[0].icon;
-                const iconUrl = customIcons[iconCode] || `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
-                const weatherDate = new Date(data.dt * 1000).toLocaleString();
-                weatherDiv.innerHTML = `
+    fetch(currentWeatherUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        const weatherDiv = document.getElementById("weather");
+        if (data.cod === 200) {
+          const iconCode = data.weather[0].icon;
+          const iconUrl = customIcons[iconCode] || `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+          const weatherDate = new Date(data.dt * 1000).toLocaleString();
+          weatherDiv.innerHTML = `
                 <h2>Current Weather in ${data.name}, ${data.sys.country}</h2>
                 <img src="${iconUrl}" alt="${data.weather[0].description}" class="weather-icon" align="center" height="100vh">
                 <p><strong>Temperature:</strong> ${data.main.temp}°C</p>
@@ -377,36 +389,36 @@ const customIcons = {
                 <p><strong>Wind Speed:</strong> ${data.wind.speed} m/s</p>
                 <p><strong>Date:</strong> ${weatherDate}</p>
                 `;
-              } else {
-                weatherDiv.innerHTML = `<p>Error: ${data.message}</p>`;
-              }
-            })
-            .catch((error) => {
-              console.error("Error fetching current weather data:", error);
-              document.getElementById(
-                "weather"
-              ).innerHTML = `<p>Failed to fetch current weather data. Please try again.</p>`;
-            });
+        } else {
+          weatherDiv.innerHTML = `<p>Error: ${data.message}</p>`;
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching current weather data:", error);
+        document.getElementById(
+          "weather"
+        ).innerHTML = `<p>Failed to fetch current weather data. Please try again.</p>`;
+      });
 
-            fetch(forecastUrl)
-  .then((response) => response.json())
-  .then((data) => {
-    const forecastDiv = document.getElementById("forecast");
-    if (data.cod === "200") {
-      let forecastHtml = `<h2></h2>`;
-      const filteredData = data.list
-        .filter((_, index) => index % 8 === 0) // Adjust the filtering if needed
-        .slice(0, 5);
+    fetch(forecastUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        const forecastDiv = document.getElementById("forecast");
+        if (data.cod === "200") {
+          let forecastHtml = `<h2></h2>`;
+          const filteredData = data.list
+            .filter((_, index) => index % 8 === 0) // Adjust the filtering if needed
+            .slice(0, 5);
 
-      filteredData.forEach((item) => {
-        const iconCode = item.weather[0].icon; // Extract the icon code properly
-        const iconUrl = customIcons[iconCode] || `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
-        // const dateTime = new Date(item.dt * 1000).toLocaleString();
-        const date = new Date(item.dt * 1000).toLocaleDateString();
-        const Time = new Date(item.dt * 1000).toLocaleTimeString();
-        
+          filteredData.forEach((item) => {
+            const iconCode = item.weather[0].icon; // Extract the icon code properly
+            const iconUrl = customIcons[iconCode] || `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+            // const dateTime = new Date(item.dt * 1000).toLocaleString();
+            const date = new Date(item.dt * 1000).toLocaleDateString();
+            const Time = new Date(item.dt * 1000).toLocaleTimeString();
 
-        forecastHtml += `
+
+            forecastHtml += `
           <div class="day">
             <center>
             <p><strong>${date}</strong></p>
@@ -417,19 +429,20 @@ const customIcons = {
             </center>
           </div>
         `;
-      });
+          });
 
-      forecastDiv.innerHTML = forecastHtml;
-    } else {
-      forecastDiv.innerHTML = `<p>Error: ${data.message}</p>`;
-    }
-  })
-            .catch((error) => {
-              console.error("Error fetching forecast data:", error);
-              document.getElementById(
-                "forecast"
-              ).innerHTML = `<p>Failed to fetch forecast data. Please try again.</p>`;
-            });
+          forecastDiv.innerHTML = forecastHtml;
+        } else {
+          forecastDiv.innerHTML = `<p>Error: ${data.message}</p>`;
         }
-      </script>
+      })
+      .catch((error) => {
+        console.error("Error fetching forecast data:", error);
+        document.getElementById(
+          "forecast"
+        ).innerHTML = `<p>Failed to fetch forecast data. Please try again.</p>`;
+      });
+  }
+</script>
+
 </html>

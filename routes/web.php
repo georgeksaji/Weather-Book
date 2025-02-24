@@ -42,3 +42,14 @@ Route::post('/register_user', [HelloController::class, 'register_user']);
 
 // /sendfeedbackmail
 Route::post('/sendfeedbackmail', [HelloController::class, 'sendfeedbackmail']);
+
+
+Route::get('/about', function () {
+    return view('about');
+});
+Route::get('/contact', function () {
+    return view('contact');
+}); 
+Route::get('/confirmpass', function () {
+    return view('confirmpass');
+});
