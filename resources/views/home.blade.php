@@ -314,7 +314,13 @@
 
       </div>
 
-      <script>
+    </main>
+  </div>
+  </div>
+</body>
+
+
+<script>
 
 const customIcons = {
   "01d": "https://cdn-icons-png.flaticon.com/512/869/869869.png", // Clear day
@@ -426,9 +432,4 @@ const customIcons = {
             });
         }
       </script>
-    </main>
-  </div>
-  </div>
-</body>
-
 </html>
