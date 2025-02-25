@@ -35,7 +35,6 @@
             border-radius: 10px;
             flex-wrap: wrap;
             display: inline-table;
-            height: 60%;
             transition: all 0.3s ease;
         }
 
@@ -130,15 +129,18 @@
         <div class="title">Login</div>
         <div class="login">
             <form action="/userlogin" method="post">
+                @csrf
                 <!-- username and password -->
                 <input type="text" name="username" placeholder="Username" required />
                 <br>
                 <input type="password" name="password" placeholder="Password" required />
-            </form>
-        </div>
-        <div class="buttons">
+                <div class="buttons">
             <button class="ad-btn logout">Login</button>
         </div>
+            
+            </form>
+        </div>
+
         <div class="footer_outer">
         <div class="footer"><a href="/register" class="">New to Weather Book? Register Now.</a></div>
         <div class="footer"><a href="/confirmpass" class="">Forgot Password?</a></div>

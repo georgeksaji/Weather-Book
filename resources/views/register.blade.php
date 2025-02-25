@@ -42,7 +42,6 @@
             background-color: #1e1e1e;
             padding: 15px;
             border-radius: 10px;
-            height: 70%;
             transition: all 0.3s ease;
             display: inline-table;
 
@@ -56,7 +55,7 @@
         .login {
             display: flex;
             justify-content: center;
-            height: 45%;
+            height: 55%;
             width: 100%;
         }
 
@@ -82,7 +81,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-block: 1vh;
+            margin-block: 2vh;
         }
 
         input {
@@ -95,7 +94,7 @@
             padding: 10px;
             border-radius: 10px;
             border: none;
-            color:rgb(152, 152, 152);
+            color: rgb(152, 152, 152);
             outline: none;
             font-family: Arial, sans-serif;
             font-size: 14px;
@@ -180,18 +179,20 @@
         </div>
         <div class="title atkinson-hyperlegible-next-text-font">Register</div>
         <div class="login">
-            <form action="" method="post">
-                <input type="text" name="username" placeholder="Username" required />
+            <form action="/registeruser" method="post">
+                @csrf
+                <input type="text" name="username" placeholder="Username / Email" required />
                 <div class="section">
                     <input id="dob" type="date" name="dob" placeholder="Date of Birth" required />
                     <input id="ph" type="number" name="phone" placeholder="Phone" required />
                 </div>
                 <input type="text" name="location" placeholder="Location" required />
                 <input type="password" name="password" placeholder="Password" required />
+
+                <div class="buttons">
+                    <button class="ad-btn logout">Register</button>
+                </div>
             </form>
-        </div>
-        <div class="buttons">
-            <button class="ad-btn logout">Register</button>
         </div>
         <a href="/index" class="">Already using Weather Book? Login</a>
 

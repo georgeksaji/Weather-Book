@@ -53,3 +53,9 @@ Route::get('/contact', function () {
 Route::get('/confirmpass', function () {
     return view('confirmpass');
 });
+
+
+// /registeruser
+Route::post('/registeruser', [HelloController::class, 'registeruser']);
+Route::post('/userlogin', [HelloController::class, 'userlogin']);
+Route::post('/userlogout', [HelloController::class, 'userlogout']);

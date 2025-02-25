@@ -58,4 +58,36 @@ class HelloController extends Controller
         });
         return view('feedback');
     }
+
+    // registeruser
+    public function registeruser(Request $request)
+    {
+        // wb_user
+        $user = new wb_user;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->save();
+        return redirect('/home');
+    }
+
+
+
+
+
+
+
+    // /userlogin
+    public function userlogin(Request $request)
+    {
+        $email = $request->email;
+        $password = $request->password;
+        $user = User::where('email', $email)->first();
+        if ($user && Hash::check($password, $user->password)) {
+            $request->session()->put('user', $user);
+            return redirect('/home');
+        } else {
+            return "Username or password is not matched";
+        }
+    }
 }
