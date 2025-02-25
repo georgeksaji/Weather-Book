@@ -176,7 +176,7 @@
 <body>
     <div class="sidebar">
         <div class="logo">
-            <img src="logo.png" alt="logo" height="150px" />
+            <img src="logo.png" alt="logo" height="120vh" />
         </div>
         <div class="title atkinson-hyperlegible-next-text-font">Register</div>
         <div class="login">

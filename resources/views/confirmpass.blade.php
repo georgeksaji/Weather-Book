@@ -23,7 +23,6 @@
         body {
             margin: 0;
             padding-block: 1%;
-            font-family: Arial, sans-serif;
             background-color: #111010f7;
             color: #ffffff;
             display: flex;
@@ -31,7 +30,6 @@
             align-items: center;
             cursor: pointer;
             overflow: hidden;
-            font-family: Arial, Helvetica, sans-serif;
             height: 100vh;
             width: 100vw;
         }
@@ -41,9 +39,7 @@
             background-color: #1e1e1e;
             padding: 20px;
             border-radius: 10px;
-            flex-wrap: wrap;
             display: inline-table;
-            height: 60%;
             transition: all 0.3s ease;
         }
 
@@ -58,8 +54,6 @@
             margin-bottom: 20px;
             height: 35%;
         }
-
-
 
         .ad-btn {
             background-color: #007bff;
@@ -91,12 +85,10 @@
             border-radius: 10px;
             border: none;
             outline: none;
-            font-family: Arial, sans-serif;
-            color:rgb(152, 152, 152);
+            color: rgb(152, 152, 152);
             font-size: 14px;
             background-color: #94959538;
         }
-
 
         .title {
             color: #ffffff;
@@ -135,12 +127,11 @@
 <body>
     <div class="sidebar">
         <div class="logo">
-            <img src="logo.png" alt="logo" height="150px" />
+            <img src="logo.png" alt="logo" height="120px" />
         </div>
         <div class="title atkinson-hyperlegible-next-text-font">Forgot Password</div>
         <div class="login">
             <form action="" method="post">
-                <!-- username and password -->
                 <div class="buttons">
                     <input type="text" name="username" placeholder="Username" required />
                     <button class="ad-btn logout">&nbspOTP&nbsp</button>
@@ -153,7 +144,6 @@
         </div>
         <div class="footer"><a href="/index" class=""><-&nbspBack to Login</a></div>
     </div>
-
 </body>
 
 </html>

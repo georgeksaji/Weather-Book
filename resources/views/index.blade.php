@@ -13,13 +13,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login:WB</title>
     <style>
-        .atkinson-hyperlegible-next-text-font {
-            font-family: "Atkinson Hyperlegible Next", serif;
-            font-optical-sizing: auto;
-            font-weight: bold;
-            font-style: normal;
-        }
-
         body {
             margin: 0;
             padding-block: 1%;
@@ -31,7 +24,6 @@
             align-items: center;
             cursor: pointer;
             overflow: hidden;
-            font-family: Arial, Helvetica, sans-serif;
             height: 100vh;
             width: 100vw;
         }
@@ -55,11 +47,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 20px;
             height: 20%;
         }
-
-
 
         .ad-btn {
             background-color: #007bff;
@@ -99,7 +88,6 @@
             background-color: #94959538;
         }
 
-
         .title {
             color: #ffffff;
             font-size: 30px;
@@ -137,11 +125,11 @@
 <body>
     <div class="sidebar">
         <div class="logo">
-            <img src="logo.png" alt="logo" height="150px" />
+            <img src="logo.png" alt="logo" height="120vh" />
         </div>
-        <div class="title atkinson-hyperlegible-next-text-font">Login</div>
+        <div class="title">Login</div>
         <div class="login">
-            <form action="" method="post">
+            <form action="/userlogin" method="post">
                 <!-- username and password -->
                 <input type="text" name="username" placeholder="Username" required />
                 <br>

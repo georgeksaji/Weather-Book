@@ -245,9 +245,13 @@
 
       .day {
         background-color: #4d4d4d3d;
-
       }
-
+      @media screen and (max-width: 600px) {
+        .day {
+          max-width: 100%;
+        }
+        
+      }
     }
     .linkstyle,.linkstyle:visited,.linkstyle:hover,.linkstyle:active {
         color: #ffffff;

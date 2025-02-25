@@ -13,13 +13,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login:WB</title>
     <style>
-        .atkinson-hyperlegible-next-text-font {
-            font-family: "Atkinson Hyperlegible Next", serif;
-            font-optical-sizing: auto;
-            font-weight: bold;
-            font-style: normal;
-        }
-
         body {
             margin: 0;
             padding-block: 1%;
@@ -32,7 +25,6 @@
             cursor: pointer;
             overflow: hidden;
             flex-wrap: wrap;
-            font-family: Arial, Helvetica, sans-serif;
             height: 100vh;
             width: 100vw;
         }
@@ -40,24 +32,17 @@
         .topbar {
             background-color: #1e1e1e;
             width: 100%;
-            font-family: Arial, sans-serif;
             font-size: 13px;
             padding-inline: 10px;
             color: white;
         }
 
-        a:link {
-            color: white;
-            text-decoration: none;
-        }
-
-        a:visited {
+        a:link, a:visited {
             color: white;
             text-decoration: none;
         }
 
         .sidebar {
-            display: flow;
             width: 70%;
             background-color: #1e1e1e;
             padding: 20px;
@@ -65,7 +50,6 @@
             height: 64%;
             flex-wrap: wrap;
             transition: all 0.3s ease;
-
         }
 
         .sidebar:hover {
@@ -120,8 +104,9 @@
             border-radius: 10px;
             border: none;
             outline: none;
-            font-family: Arial, sans-serif;
             font-size: 14px;
+            background-color: #94959538;
+            color: white;
         }
 
         .title {
@@ -149,19 +134,9 @@
             color: #ffffff;
             font-size: 12px;
             text-align: center;
-            font-family: Arial, Helvetica, sans-serif;
             text-decoration: none;
             display: block;
             margin-top: 5px;
-        }
-
-        input {
-            border: none;
-            outline: none;
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            color: white;
-            background-color: #94959538;
         }
     </style>
 </head>
