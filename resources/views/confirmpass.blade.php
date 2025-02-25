@@ -132,6 +132,7 @@
         <div class="title atkinson-hyperlegible-next-text-font">Forgot Password</div>
         <div class="login">
             <form action="" method="post">
+            @csrf
                 <div class="buttons">
                     <input type="text" name="username" placeholder="Username" required />
                     <button class="ad-btn logout">&nbspOTP&nbsp</button>
