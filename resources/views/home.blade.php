@@ -99,7 +99,7 @@
       cursor: pointer;
       margin-top: 20px;
       font-weight: bold;
-      min-width: 50%;
+      min-width:125px;
       transition: all 0.3s ease;
     }
 
@@ -210,14 +210,13 @@
       width: 100%;
     }
 
-        form {
+    .logoutform {
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100%;
       width: 100%;
+      background-color: none;
     }
-
 
     .buttonouter {
       display: inline-grid;
@@ -281,7 +280,6 @@
       padding-inline: 10px;
       color: white;
     }
-
   </style>
 </head>
 
@@ -333,9 +331,10 @@
         <div class="br1">
           <a href="/feedback"><button class="ad-btn"><img src="send.png" height="15px"
                 alt="Fav" />&nbspFeedback</button></a>
-          <form class="logout" action="/userlogout" method="post"><button class="ad-btn logout"><img src="logout.png" height="15px"
-                alt="Fav" />&nbspLog
-              Out</button>
+          <form class="logoutform" action="/userlogout" method="post">
+            @csrf
+            <input type="hidden" name="username" value="{{ session('username') }}">
+            <button class="ad-btn logout"><img src="logout.png" height="15px" alt="Fav" />&nbspLog Out</button>
           </form>
         </div>
         <div class="topbar" style="text-align:center">

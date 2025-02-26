@@ -159,9 +159,6 @@ class HelloController extends Controller
 //userlogout
 public function userlogout(Request $request)
 {
-    // Retrieve the user by username from session
-
-    $user = WbUser::where('username', $request->username)->first(); 
     // Log out the user
     Auth::logout();
     // Invalidate the session

@@ -58,4 +58,4 @@ Route::get('/confirmpass', function () {
 // /registeruser
 Route::post('/registeruser', [HelloController::class, 'registeruser']);
 Route::post('/userlogin', [HelloController::class, 'userlogin']);
-Route::get('/userlogout', [HelloController::class, 'userlogout']);
+Route::post('/userlogout', [HelloController::class, 'userlogout']);
