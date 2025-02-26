@@ -10,6 +10,7 @@
         href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&display=swap"
         rel="stylesheet">
     <meta charset="UTF-8" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login:WB</title>
     <style>
@@ -29,9 +30,9 @@
         }
 
         .sidebar {
-            width: 25%;
             background-color: #1e1e1e;
             padding: 20px;
+            max-width: min-content;
             border-radius: 10px;
             flex-wrap: wrap;
             display: inline-table;
@@ -81,6 +82,7 @@
             border-radius: 10px;
             border: none;
             outline: none;
+            margin-block-start: 20px;
             font-family: Arial, sans-serif;
             color:rgb(152, 152, 152);
             font-size: 14px;
@@ -122,6 +124,12 @@
 </head>
 
 <body>
+<div class="sidebar">
+@if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
     <div class="sidebar">
         <div class="logo">
             <img src="logo.png" alt="logo" height="120vh" />
@@ -131,9 +139,8 @@
             <form action="/userlogin" method="post">
                 @csrf
                 <!-- username and password -->
-                <input type="text" name="username" placeholder="Username" required />
-                <br>
-                <input type="password" name="password" placeholder="Password" required />
+                <input type="text" maxlength="255" value="{{ old('username') }}" name="username" placeholder="Username" required />
+                <input type="password" minlength="5" value="{{ old('password') }}" name="password" placeholder="Password" required />
                 <div class="buttons">
             <button class="ad-btn logout">Login</button>
         </div>
@@ -145,7 +152,7 @@
         <div class="footer"><a href="/register" class="">New to Weather Book? Register Now.</a></div>
         <div class="footer"><a href="/confirmpass" class="">Forgot Password?</a></div>
     </div></div>
-
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

@@ -210,6 +210,15 @@
       width: 100%;
     }
 
+        form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+    }
+
+
     .buttonouter {
       display: inline-grid;
       justify-content: center;
@@ -233,7 +242,7 @@
       .container {
         flex-direction: column;
       }
-    
+
       .sidebar {
         width: 100%;
         margin-bottom: 20px;
@@ -246,27 +255,33 @@
       .day {
         background-color: #4d4d4d3d;
       }
+
       @media screen and (max-width: 600px) {
         .day {
           max-width: 100%;
         }
-        
+
       }
     }
-    .linkstyle,.linkstyle:visited,.linkstyle:hover,.linkstyle:active {
-        color: #ffffff;
-        text-decoration: none;
-      }
-      .topbar {
-        background-color: #1e1e1e;
-        width: 100%;
-        font-family: Arial, sans-serif;
-        font-size: 15px;
-        text-align: center;
-        padding-inline: 10px;
-        color: white;
-      }
-    
+
+    .linkstyle,
+    .linkstyle:visited,
+    .linkstyle:hover,
+    .linkstyle:active {
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    .topbar {
+      background-color: #1e1e1e;
+      width: 100%;
+      font-family: Arial, sans-serif;
+      font-size: 15px;
+      text-align: center;
+      padding-inline: 10px;
+      color: white;
+    }
+
   </style>
 </head>
 
@@ -274,7 +289,17 @@
   <div class="container">
     <div class="sidebar">
       <div class="topbar" style="text-align:center">
-        <p>username</p>
+
+        @if (session('role') === 'admin')
+      <p>{{ session('role') }}</p>
+    @endif
+        @if (session('role') === 'user')
+      @if (session('username'))
+      <p>{{ session('username') }}</p>
+    @else
+      <p>username</p>
+    @endif
+    @endif
       </div>
       <div class="logo">
         <img src="logo.png" alt="logo" height="120px" />
@@ -308,8 +333,10 @@
         <div class="br1">
           <a href="/feedback"><button class="ad-btn"><img src="send.png" height="15px"
                 alt="Fav" />&nbspFeedback</button></a>
-          <a href="/feedback"><button class="ad-btn logout"><img src="logout.png" height="15px" alt="Fav" />&nbspLog
-              Out</button></a>
+          <form class="logout" action="/userlogout" method="post"><button class="ad-btn logout"><img src="logout.png" height="15px"
+                alt="Fav" />&nbspLog
+              Out</button>
+          </form>
         </div>
         <div class="topbar" style="text-align:center">
           <p><img src="current-location.png" height="15px" alt="">&nbsp{{ $city}},&nbsp{{ $region }},&nbsp{{ $country }}

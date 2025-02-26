@@ -12,6 +12,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login:WB</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .atkinson-hyperlegible-next-text-font {
             font-family: "Atkinson Hyperlegible Next", serif;
@@ -39,6 +40,7 @@
         .sidebar {
             min-width: 300px;
             width: 25%;
+            
             background-color: #1e1e1e;
             padding: 15px;
             border-radius: 10px;
@@ -89,7 +91,8 @@
         }
 
         input[type="text"],
-        input[type="password"] {
+        input[type="password"],
+        input[type="email"] {
             width: 83%;
             padding: 10px;
             border-radius: 10px;
@@ -101,12 +104,26 @@
             background-color: #94959538;
         }
 
-        input[type="date"]::-webkit-datetime-edit {
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus,
+        input:-webkit-autofill:active {
+            background-color: #94959538
+        }
+
+        input[type="date"]::-webkit-datetime-edit,
+        input[type="tel"]::-webkit-datetime-edit {
             color: rgb(119, 119, 122);
         }
 
+        input[type="tel"]::-webkit-inner-spin-button,
+        input[type="tel"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
         #dob {
-            width: 30%;
+            width: 36%;
             padding: 10px;
             border-radius: 10px;
             border: none;
@@ -122,6 +139,7 @@
             padding: 10px;
             border-radius: 10px;
             border: none;
+            color: rgb(119, 119, 122);
             outline: none;
             font-family: Arial, sans-serif;
             margin-inline-start: 5px;
@@ -174,6 +192,17 @@
 
 <body>
     <div class="sidebar">
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
         <div class="logo">
             <img src="logo.png" alt="logo" height="120vh" />
         </div>
@@ -181,13 +210,24 @@
         <div class="login">
             <form action="/registeruser" method="post">
                 @csrf
-                <input type="text" name="username" placeholder="Username / Email" required />
+                <input type="email" name="username" placeholder="Username / Email" maxlength="255" required />
                 <div class="section">
                     <input id="dob" type="date" name="dob" placeholder="Date of Birth" required />
-                    <input id="ph" type="number" name="phone" placeholder="Phone" required />
+                    <script>
+                        // Get today's date in YYYY-MM-DD format
+                        const today = new Date().toISOString().split('T')[0];
+
+                        // Set the max attribute of the input field to today's date
+                        document.getElementById('dob').setAttribute('max', today);
+                    </script>
+
+                    <input id="ph" type="tel" name="phone" pattern="[0-9]{10}" placeholder="Phone" minlength="10"
+                        maxlength="10" required />
                 </div>
-                <input type="text" name="location" placeholder="Location" required />
-                <input type="password" name="password" placeholder="Password" required />
+                <input type="text" name="location" maxlength="255" placeholder="Location" required />
+                <input type="password" minlength="5" name="password" placeholder="Password" required />
+                <input type="password" minlength="5" name="password_confirmation" placeholder="Confirm Password"
+                    required />
 
                 <div class="buttons">
                     <button class="ad-btn logout">Register</button>
@@ -197,7 +237,7 @@
         <a href="/index" class="">Already using Weather Book? Login</a>
 
     </div>
-
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>
