@@ -49,13 +49,20 @@ class HelloController extends Controller
     public function sendfeedbackmail(Request $request)
     {
         $email = $request->feedback;
-        Mail::raw($email, function ($message) {
+        if (empty($email)) {
+            return redirect()->back()->with('error', 'Feedback is empty');
+        }
+        try{
+            Mail::raw($email, function ($message) {
             $message->to('mca2426@rajagiri.edu')
                 ->from('georgeksaji14@gmail.com', 'Weather Book') // Add sender details
                 ->subject('Weather Book Feedback');
         });
-        return view('feedback');
+        return redirect()->back()->with('success', 'Feedback mail sent successfully');
+    } catch (\Exception $e) {
+        return redirect()->back()->with('error', 'Feedback mail failed. Try again later.');
     }
+}
 
     // registeruser
     public function registeruser(Request $request)

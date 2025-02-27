@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
     <meta charset="UTF-8" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login:WB</title>
     <style>
@@ -40,12 +41,18 @@
             text-decoration: none;
         }
         .sidebar {
-            width: 50%;
+            max-width: 50%;
             background-color: #1e1e1e;
             padding: 20px;
             border-radius: 10px;
             display: inline-grid;
             transition: all 0.3s ease;
+        }
+        @media screen and (max-width: 600px) {
+            .sidebar {
+                max-width: 80%;
+            }
+            
         }
         .sidebar:hover {
             transform: scale(1.02);
@@ -114,6 +121,17 @@
 
 <body>
     <div class="sidebar">
+    @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
         <div class="topbar"><a href="/home">Home->Feedback</a></div>
         <div class="logo">
             <img src="logo.png" alt="logo" height="100px" />
@@ -131,6 +149,7 @@
         </div>
         </form>
     </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>
