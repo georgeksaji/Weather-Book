@@ -22,7 +22,6 @@
 
     body {
       margin: 0;
-      padding-block: 1%;
       font-family: Arial, sans-serif;
       background-color: #111010f7;
       color: #ffffff;
@@ -39,6 +38,7 @@
       width: 95%;
       justify-content: center;
       align-items: center;
+      min-height: 100vh;  
     }
 
     .sidebar {
@@ -46,7 +46,6 @@
       background-color: #1e1e1e;
       padding: 20px;
       border-radius: 10px;
-      height: 90vh;
     }
 
     .location {
@@ -99,8 +98,13 @@
       cursor: pointer;
       margin-top: 20px;
       font-weight: bold;
-      min-width:125px;
       transition: all 0.3s ease;
+    }
+    @media screen and (min-width: 1000px) {
+      .ad-btn {
+        min-width:125px;
+      }
+      
     }
 
     .ad-btn:hover {
@@ -304,7 +308,7 @@
       </div>
       <div class="location">
         <form action="" method="post">
-          <input type="text" id="city" value="{{ $city }}" placeholder="Enter city name">
+          <input type="text" id="city" placeholder="Enter city name">
           <button type="button" class="citybutton"
             onclick="getWeather(document.getElementById('city').value)">Search</button>
         </form>
@@ -338,8 +342,7 @@
           </form>
         </div>
         <div class="topbar" style="text-align:center">
-          <p><img src="current-location.png" height="15px" alt="">&nbsp{{ $city}},&nbsp{{ $region }},&nbsp{{ $country }}
-          </p>
+           <!-- city-->
         </div>
       </div>
       <div class="footer" style="width: 100%;height: 2%;display: flex;justify-content: space-evenly;font-size: 12px;">
@@ -385,8 +388,6 @@
     "50n": "https://cdn-icons-png.flaticon.com/512/2675/2675962.png",
 
   };
-
-  onload = getWeather({{ $city }});
 
   function getWeather(cityName = null) {
     const city = cityName || document.getElementById("city").value;

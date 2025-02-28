@@ -129,37 +129,26 @@ class HelloController extends Controller
     // /userlogin
     public function userlogin(Request $request)
 {
-    // Validate the request
     $validator = Validator::make($request->all(), [
-        'username' => 'required|string', // Remove 'email' if username is not an email
+        'username' => 'required|email',
         'password' => 'required|string|min:5',
     ]);
-    // Check for validation errors
     if ($validator->fails()) {
-        return redirect()->back()
-                         ->withErrors($validator) // Pass validation errors to the view
-                         ->withInput(); // Repopulate the form with old input
+        return redirect()->back()->withErrors($validator)->withInput(); 
     }
-    // Retrieve the user by username
     $user = WbUser::where('username', $request->username)->first();
-    // Check if the user exists, is active, and the password is correct
     if ($user && $user->status === 'active' && Hash::check($request->password, $user->password)) {
-        // Log in the user
         Auth::login($user);
         session([
             'userid' => $user->id,
             'role' => $user->role,
             'username' => $user->username,
         ]);
-        // Regenerate the session ID for security
         $request->session()->regenerate();
-        // Redirect to the home page
         return redirect('/home');
     } else {
         // Authentication failed
-        return redirect()->back()
-                         ->with('error', 'Username or password is incorrect, or account is inactive')
-                         ->withInput();
+        return redirect()->back()->with('error', 'Username or password is incorrect, or account is inactive')->withInput();
     }
 }
 
