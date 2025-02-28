@@ -60,3 +60,6 @@ Route::post('/userlogin', [HelloController::class, 'userlogin']);
 Route::post('/userlogout', [HelloController::class, 'userlogout']);
 Route::post('/addcity', [HelloController::class, 'addcity']);
 Route::post('/removecity', [HelloController::class, 'removecity']);
+Route::post('/verifyusername', [HelloController::class, 'forgotpassword']);
+Route::post('/verifyotp', [HelloController::class, 'verifyotp']);
+Route::post('/changepass', [HelloController::class, 'changepass']);

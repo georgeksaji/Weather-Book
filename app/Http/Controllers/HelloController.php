@@ -108,7 +108,6 @@ class HelloController extends Controller
                 ->withErrors($validator) // Pass validation errors to the view
                 ->withInput();
         }
-
         try {
             $user = new WbUser;
             $user->username = strtolower($request->username);
@@ -162,6 +161,7 @@ class HelloController extends Controller
             // Authentication failed
             return redirect()->back()->with('error', 'Username or password is incorrect, or account is inactive')->withInput();
         }
+
     }
 
     //userlogout
@@ -198,7 +198,7 @@ class HelloController extends Controller
             $city->user_id = session('userid');
             $city->save();
 
- session()->put('cities', WbCity::where('user_id', session('userid'))->get());
+            session()->put('cities', WbCity::where('user_id', session('userid'))->get());
             //return home
             return redirect()->back()->with('success', 'City added successfully');
         } catch (\Exception $e) {
@@ -214,25 +214,81 @@ class HelloController extends Controller
         if ($city) {
             $city->delete();
 
- session()->put('cities', WbCity::where('user_id', session('userid'))->get());
- return redirect()->back()->with('success', 'City removed successfully');
+            session()->put('cities', WbCity::where('user_id', session('userid'))->get());
+            return redirect()->back()->with('success', 'City removed successfully');
         } else {
             return redirect()->back()->with('error', 'City removal failed. Try again later.');
         }
     }
 
+    public function forgotpassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'username' => 'required|email',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->with('error','Invalid username')->withInput();
+        }
+        $user = WbUser::where('username', $request->username)->first();
+        if ($user) {
+            $random = rand(1000, 9999);
+            $user->otp = Hash::make($random);
+            $user->otp_expiry = now()->addMinutes(1);
+            $user->is_verified = false;
+            $user->save();
+            try {
+                Mail::raw("Hi, greetings from WeatherBook! Your OTP to reset your password is $random. Verify your OTP in 1 minute.", function ($message) use ($user) {
+                    $message->to($user->username)
+                    ->from('georgeksaji14@gmail.com', 'Weather Book') // Add sender details
+                    ->subject('Reset Password OTP');
+                });
+                return redirect()->back()->with('success','OTP sent to your email. Verify in 1 minute.',)->with('status','otp')->withInput();
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error','OTP sending failed')->withInput();
+            }
+        } else {
+            return redirect()->back()->with('error','Username not found')->withInput();
+        }
+}
 
+public function verifyotp(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'otp' => 'required|string|min:4|max:4',
+    ]);
+    if ($validator->fails()) {
+        return redirect()->back()->with('error','Invalid OTP')->withInput();
+    }
+    $user = WbUser::where('username', $request->username)->first();
+    if ($user) {
+        if (Hash::check($request->otp, $user->otp) && $user->otp_expiry > now() && !$user->is_verified) {
+            return redirect()->back()->with('success','OTP verified successfully')->with('verified','otp')->withInput();
+        } else {
+            return redirect()->back()->with('error','OTP verification failed')->withInput();
+        }
+    } else {
+        return redirect()->back()->with('error','Username not found')->withInput();
+    }
+}
+public function changepass(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'password' => 'required|string|min:5|confirmed',
+    ]);
+    if ($validator->fails()) {
+        return redirect()->back()->withErrors($validator)->withInput();
+    }
+    $user = WbUser::where('username', $request->username)->first();
+    if ($user && !$user->is_verified) {
+        $user->password = Hash::make($request->password);
+        $user->otp = null;
+        $user->otp_expiry = null;
+        $user->is_verified = true;
+        $user->save();
+        return redirect()->back()->with('success','Password changed successfully')->withInput();
+    } else {
+        return redirect()->back()->with('error','Password change failed')->withInput();
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
+}
 }

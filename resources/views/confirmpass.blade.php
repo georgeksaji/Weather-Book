@@ -9,6 +9,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&display=swap"
         rel="stylesheet">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login:WB</title>
@@ -42,13 +43,18 @@
             display: inline-table;
             transition: all 0.3s ease;
         }
-
+        @media screen and (max-width: 600px) {
+            .sidebar {
+                width: 90%;
+            }
+            
+        }
         .sidebar:hover {
             transform: scale(1.05);
         }
 
         .login {
-            display: flex;
+            display: inline-block;
             justify-content: center;
             align-items: center;
             margin-bottom: 20px;
@@ -59,9 +65,11 @@
             background-color: #007bff;
             color: #ffffff;
             border: none;
-            padding: 10px 20px;
+            padding-block: 10px;
+            padding-inline: 10px;
             margin: 10px;
             border-radius: 5px;
+            width:17vh;
             cursor: pointer;
             font-weight: bold;
             transition: all 0.3s ease;
@@ -76,12 +84,14 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 20%;
+            height: 100%;
         }
 
         input[type="text"],
-        input[type="password"] {
+        input[type="password"],
+        input[type="number"] {
             padding: 10px;
+            width:27vh;
             border-radius: 10px;
             border: none;
             outline: none;
@@ -113,6 +123,13 @@
             width: 100%;
         }
 
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+
         a {
             color: #ffffff;
             font-size: 10px;
@@ -126,25 +143,57 @@
 
 <body>
     <div class="sidebar">
+    @if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+    @endif
+    @if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
         <div class="logo">
             <img src="logo.png" alt="logo" height="120px" />
         </div>
         <div class="title atkinson-hyperlegible-next-text-font">Forgot Password</div>
         <div class="login">
-            <form action="" method="post">
-            @csrf
+
+            <form action="/verifyusername" method="post">
+                @csrf
                 <div class="buttons">
-                    <input type="text" name="username" placeholder="Username" required />
-                    <button class="ad-btn logout">&nbspOTP&nbsp</button>
+                    <input type="text" name="username" value="{{ old('username') }}" placeholder="Username" required />
+                    <button class="ad-btn logout">Send OTP</button>
                 </div>
+            </form>
+
+            @if (session('status') )
+            <form action="/verifyotp" method="post">
+                @csrf
                 <div class="buttons">
-                    <input type="password" name="password" placeholder="Password" required />
+                    <input type="hidden" name="username" value="{{ old('username') }}" placeholder="Username" required />
+                    <input type="number" name="otp" min="1000" value="{{ old('otp') }}" max="9999" placeholder="Enter OTP" required />
+                    <button class="ad-btn logout">Verify</button>
+                </div>
+            </form>
+            @endif
+
+            @if (session('verified') )
+            <form action="/changepass" method="post">
+                @csrf
+                <div class="buttons">
+                    <input type="hidden" name="username" value="{{ old('username') }}" placeholder="Username" required />
+                    <input type="password" name="password" name="password" placeholder="Password" required />
                     <button class="ad-btn logout">Reset</button>
                 </div>
             </form>
+            @endif
+
         </div>
-        <div class="footer"><a href="/index" class=""><-&nbspBack to Login</a></div>
+        <div class="footer"><a href="/index" class="">←&nbspBack to Login</a></div>
     </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 
 </html>
