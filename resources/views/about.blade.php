@@ -130,7 +130,7 @@
 
 <body>
     <div class="sidebar">
-        <div class="topbar"><a href="/home">Home->About</a></div>
+        <div class="topbar"><a href="/home">Home → About</a></div>
         <div class="logo">
             <img src="logo.png" alt="logo" height="100px" />
         </div>

@@ -345,7 +345,8 @@
            <!-- city-->
         </div>
       </div>
-      <div class="footer" style="width: 100%;height: 2%;display: flex;justify-content: space-evenly;font-size: 12px;">
+      <div class="footer" style="width: 100%;height: 2%;
+    padding-block-start: 6vh;display: flex;justify-content: space-evenly;font-size: 12px;">
         <a href="/about" class="linkstyle">About</a>
         <a href="/contact" class="linkstyle">Contact</a>
       </div>

@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use App\Models\WbUser;
+use App\Models\WbCity;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -165,4 +166,45 @@ public function userlogout(Request $request)
     return redirect('/');
 
 }
+
+
+public function addcity(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'city' => 'required|string|max:255',
+        'country' => 'required|string|max:255',
+    ]);
+    if ($validator->fails()) {
+        return redirect()->back()->withErrors($validator)->withInput();
+    }
+    try {
+        if (WbCity::where('city_name', $request->city)->where('country_name', $request->country)->where('user_id', session('userid'))->exists()) {
+            return redirect()->back()->with('error', 'City already exists')->withInput();
+        }
+        $city = new WbCity;
+        $city->city_name = $request->city;
+        $city->country_name = $request->country;
+        $city->user_id = session('userid');
+        $city->save();
+        return redirect()->back()->with('success', 'City added successfully');
+    } catch (\Exception $e) {
+        \Log::error('City addition failed: ' . $e->getMessage());
+        return redirect()->back()->with('error', 'City addition failed. Try again later.')->withInput();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
