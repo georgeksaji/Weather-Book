@@ -61,7 +61,7 @@
         }
         @media screen and (max-width: 600px) {
             .sidebar {
-                width: 70%;
+                width: 90%;
             }
             
         }
