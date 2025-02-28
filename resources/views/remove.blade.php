@@ -10,6 +10,8 @@
         href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&display=swap"
         rel="stylesheet">
     <meta charset="UTF-8" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login:WB</title>
     <style>
@@ -22,7 +24,6 @@
 
         body {
             margin: 0;
-            padding-block: 1%;
             background-color: #111010f7;
             color: #ffffff;
             display: flex;
@@ -35,11 +36,16 @@
         .topbar {
             background-color: #1e1e1e;
             width: 100%;
-            font-size: 13px;
+            font-size: 12px;
             padding-inline: 10px;
             color: white;
         }
-
+        .topmsg
+        {
+            width: 100%;
+            font-size: 10px;
+            color: white;    
+        }
         a:link,
         a:visited {
             color: white;
@@ -47,12 +53,17 @@
         }
 
         .sidebar {
-            width: 55%;
+            width: 40%;
             background-color: #1e1e1e;
             padding: 20px;
             border-radius: 10px;
-            height: 60%;
             transition: all 0.3s ease;
+        }
+        @media screen and (max-width: 600px) {
+            .sidebar {
+                width: 70%;
+            }
+            
         }
 
         .sidebar:hover {
@@ -97,7 +108,7 @@
             border: none;
             padding: 6px;
             margin: 3px;
-            width: 100%;
+            width: 90%;
             font-weight: bold;
             text-align: left;
             border-radius: 5px;
@@ -113,25 +124,47 @@
 
 <body>
     <div class="sidebar">
-        <div class="topbar"><a href="/home">Home->Remove Cities</a></div>
+    @if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+    @endif
+    @if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
+        <div class="topbar"><a href="/home">Home → Remove Cities</a></div>
         <div class="logo">
             <img src="logo.png" alt="logo" height="100px" />
         </div>
         <div class="title atkinson-hyperlegible-next-text-font">Remove Cities</div>
+        <div class="topmsg" style="text-align:center"><p>Click on the city you want to remove.</p>
+        </div>
         <div class="login">
-            <form action="" method="post">
-                <button class="favcity" value="London" onclick="getWeather(this.value)">London</button>
-                <button class="favcity" value="Tokyo" onclick="getWeather(this.value)">Tokyo</button>
-                <button class="favcity" value="New York" onclick="getWeather(this.value)">New York</button>
-                <button class="favcity" value="Delhi" onclick="getWeather(this.value)">Delhi</button>
-                <button class="favcity" value="Paris" onclick="getWeather(this.value)">Paris</button>
-                <button class="favcity" value="London" onclick="getWeather(this.value)">London</button>
-                <button class="favcity" value="Tokyo" onclick="getWeather(this.value)">Tokyo</button>
-                <button class="favcity" value="New York" onclick="getWeather(this.value)">New York</button>
-                <button class="favcity" value="Delhi" onclick="getWeather(this.value)">Delhi</button>
-                <button class="favcity" value="Paris" onclick="getWeather(this.value)">Paris</button>
+            <form action="/removecity" method="post">
+                @csrf
+                <input type="hidden" name="city_name" id="selectedCity">
+                @if(session()->has('cities') && count(session('cities')) > 0)
+        @foreach(session('cities') as $city)
+        <button type="submit" class="favcity" onclick="setCityValue(event, '{{ $city->city_name }}')">
+            {{ $city->city_name }} , {{ $city->country_name }}
+        </button>
+        @endforeach
+      @else
+      <p><center>No cities added to favorites.</center></p>
+      @endif
             </form>
         </div>
     </div>
 </body>
+<script>
+    function setCityValue(event, cityName) {
+    event.preventDefault(); // Prevent default form submission
+    document.getElementById('selectedCity').value = cityName; // Set hidden input value
+    event.target.form.submit(); // Submit the form manually
+}
+</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </html>

@@ -30,8 +30,7 @@ Route::get('/remove', function () {
     return view('remove');
 });
 Route::get('/home', function () {
-    $location = app(HelloController::class)->getLocation();
-    return view('home', ['city'=>$location[0], 'region'=>$location[1], 'country'=>$location[2]]);
+    return view('home');
 });
 Route::get('/add', function () {
     $location = app(HelloController::class)->getLocation();
@@ -60,3 +59,4 @@ Route::post('/registeruser', [HelloController::class, 'registeruser']);
 Route::post('/userlogin', [HelloController::class, 'userlogin']);
 Route::post('/userlogout', [HelloController::class, 'userlogout']);
 Route::post('/addcity', [HelloController::class, 'addcity']);
+Route::post('/removecity', [HelloController::class, 'removecity']);

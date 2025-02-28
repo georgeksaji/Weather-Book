@@ -53,17 +53,17 @@ class HelloController extends Controller
         if (empty($email)) {
             return redirect()->back()->with('error', 'Feedback is empty');
         }
-        try{
+        try {
             Mail::raw($email, function ($message) {
-            $message->to('mca2426@rajagiri.edu')
-                ->from('georgeksaji14@gmail.com', 'Weather Book') // Add sender details
-                ->subject('Weather Book Feedback');
-        });
-        return redirect()->back()->with('success', 'Feedback mail sent successfully');
-    } catch (\Exception $e) {
-        return redirect()->back()->with('error', 'Feedback mail failed. Try again later.');
+                $message->to('mca2426@rajagiri.edu')
+                    ->from('georgeksaji14@gmail.com', 'Weather Book') // Add sender details
+                    ->subject('Weather Book Feedback');
+            });
+            return redirect()->back()->with('success', 'Feedback mail sent successfully');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Feedback mail failed. Try again later.');
+        }
     }
-}
 
     // registeruser
     public function registeruser(Request $request)
@@ -129,69 +129,97 @@ class HelloController extends Controller
 
     // /userlogin
     public function userlogin(Request $request)
-{
-    $validator = Validator::make($request->all(), [
-        'username' => 'required|email',
-        'password' => 'required|string|min:5',
-    ]);
-    if ($validator->fails()) {
-        return redirect()->back()->withErrors($validator)->withInput(); 
-    }
-    $user = WbUser::where('username', $request->username)->first();
-    if ($user && $user->status === 'active' && Hash::check($request->password, $user->password)) {
-        Auth::login($user);
-        session([
-            'userid' => $user->id,
-            'role' => $user->role,
-            'username' => $user->username,
+    {
+        $validator = Validator::make($request->all(), [
+            'username' => 'required|email',
+            'password' => 'required|string|min:5',
         ]);
-        $request->session()->regenerate();
-        return redirect('/home');
-    } else {
-        // Authentication failed
-        return redirect()->back()->with('error', 'Username or password is incorrect, or account is inactive')->withInput();
-    }
-}
-
-//userlogout
-public function userlogout(Request $request)
-{
-    // Log out the user
-    Auth::logout();
-    // Invalidate the session
-    $request->session()->invalidate();
-    // Regenerate the CSRF token
-    $request->session()->regenerateToken();
-    // Redirect to the home page
-    return redirect('/');
-
-}
-
-
-public function addcity(Request $request)
-{
-    $validator = Validator::make($request->all(), [
-        'city' => 'required|string|max:255',
-        'country' => 'required|string|max:255',
-    ]);
-    if ($validator->fails()) {
-        return redirect()->back()->withErrors($validator)->withInput();
-    }
-    try {
-        if (WbCity::where('city_name', $request->city)->where('country_name', $request->country)->where('user_id', session('userid'))->exists()) {
-            return redirect()->back()->with('error', 'City already exists')->withInput();
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
         }
-        $city = new WbCity;
-        $city->city_name = $request->city;
-        $city->country_name = $request->country;
-        $city->user_id = session('userid');
-        $city->save();
-        return redirect()->back()->with('success', 'City added successfully');
-    } catch (\Exception $e) {
-        \Log::error('City addition failed: ' . $e->getMessage());
-        return redirect()->back()->with('error', 'City addition failed. Try again later.')->withInput();
+        $user = WbUser::where('username', $request->username)->first();
+        if ($user && $user->status === 'active' && Hash::check($request->password, $user->password)) {
+            Auth::login($user);
+            //fetch cities for the user
+            $cities = WbCity::where('user_id', $user->id)->get();
+            if ($cities->count() > 0) {
+                session([
+                    'userid' => $user->id,
+                    'role' => $user->role,
+                    'username' => $user->username,
+                    'cities' => $cities,
+                ]);
+            } else {
+                session([
+                    'userid' => $user->id,
+                    'role' => $user->role,
+                    'username' => $user->username,
+                ]);
+            }
+            $request->session()->regenerate();
+            return redirect('/home');
+        } else {
+            // Authentication failed
+            return redirect()->back()->with('error', 'Username or password is incorrect, or account is inactive')->withInput();
+        }
     }
-}
+
+    //userlogout
+    public function userlogout(Request $request)
+    {
+        // Log out the user
+        Auth::logout();
+        // Invalidate the session
+        $request->session()->invalidate();
+        // Regenerate the CSRF token
+        $request->session()->regenerateToken();
+        // Redirect to the home page
+        return redirect('/');
+
+    }
+
+
+    public function addcity(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'city' => 'required|string|max:255',
+            'country' => 'required|string|max:255',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        try {
+            if (WbCity::where('city_name', $request->city)->where('country_name', $request->country)->where('user_id', session('userid'))->exists()) {
+                return redirect()->back()->with('error', 'City already exists')->withInput();
+            }
+            $city = new WbCity;
+            $city->city_name = $request->city;
+            $city->country_name = $request->country;
+            $city->user_id = session('userid');
+            $city->save();
+
+ session()->put('cities', WbCity::where('user_id', session('userid'))->get());
+            //return home
+            return redirect()->back()->with('success', 'City added successfully');
+        } catch (\Exception $e) {
+            \Log::error('City addition failed: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'City addition failed. Try again later.')->withInput();
+        }
+    }
+
+    public function removecity(Request $request)
+    {
+        $city = $request->input('city_name');
+        $city = WbCity::where('city_name', $city)->where('user_id', session('userid'))->first();
+        if ($city) {
+            $city->delete();
+
+ session()->put('cities', WbCity::where('user_id', session('userid'))->get());
+ return redirect()->back()->with('success', 'City removed successfully');
+        } else {
+            return redirect()->back()->with('error', 'City removal failed. Try again later.');
+        }
+    }
 
 
 

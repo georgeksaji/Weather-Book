@@ -316,13 +316,15 @@
       <h3><img src="fav.png" height="20px" alt="Fav" />&nbspMy Favorites</h3>
       <div class="fav">
 
-        <button class="favcity" value="London" onclick="getWeather(this.value)">London</button>
-        <button class="favcity" value="Tokyo" onclick="getWeather(this.value)">Tokyo</button>
-        <button class="favcity" value="New York" onclick="getWeather(this.value)">New York</button>
-        <button class="favcity" value="Delhi" onclick="getWeather(this.value)">Delhi</button>
-        <button class="favcity" value="Paris" onclick="getWeather(this.value)">Paris</button>
-        <button class="favcity" value="London" onclick="getWeather(this.value)">London</button>
-        <button class="favcity" value="Tokyo" onclick="getWeather(this.value)">Tokyo</button>
+      @if(session()->has('cities') && count(session('cities')) > 0)
+    @foreach(session('cities') as $city)
+        <button class="favcity" value="{{ $city->city_name }}" onclick="getWeather(this.value)">
+            {{ $city->city_name }}
+        </button>
+    @endforeach
+@else
+    <p><center>No cities added to favorites.</center></p>
+@endif
 
       </div>
       <div class="buttonouter">
