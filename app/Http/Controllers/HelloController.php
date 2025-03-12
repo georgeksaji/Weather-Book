@@ -126,6 +126,7 @@ class HelloController extends Controller
     }
 
 
+    
     // /userlogin
     public function userlogin(Request $request)
     {
@@ -163,6 +164,7 @@ class HelloController extends Controller
         }
 
     }
+
 
     //userlogout
     public function userlogout(Request $request)
@@ -273,7 +275,7 @@ public function verifyotp(Request $request)
 public function changepass(Request $request)
 {
     $validator = Validator::make($request->all(), [
-        'password' => 'required|string|min:5|confirmed',
+        'password' => 'required|string|min:5',
     ]);
     if ($validator->fails()) {
         return redirect()->back()->withErrors($validator)->withInput();
@@ -289,6 +291,5 @@ public function changepass(Request $request)
     } else {
         return redirect()->back()->with('error','Password change failed')->withInput();
     }
-
 }
 }
