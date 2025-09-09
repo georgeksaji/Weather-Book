@@ -4,15 +4,23 @@
 <head>
     <link rel="shortcut icon" href="icon.png" type="image/x-icon">
     <link rel="icon" href="icon.png" type="image/x-icon">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&display=swap"
-        rel="stylesheet">
-    <meta charset="UTF-8" />
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login:WB</title>
+
+    <title>WeatherBook : Get Accurate Weather Info</title>
+    <meta name="description" content="Get real-time weather updates and multi-day forecasts worldwide with WeatherBook – a fast, mobile-friendly Laravel app with location detection." />
+    <meta name="keywords" content="weatherbook, weather book, weather, weather george k saji, weatherbook george, weatherbook george saji, weather forecast, local weather, weather updates, real-time weather, WeatherBook" />
+    <meta name="author" content="WeatherBook Team" />
+
+    <link rel="canonical" href="https://weatherbook.infy.uk/" />
+    
     <style>
         body {
             margin: 0;
